@@ -12,9 +12,6 @@ jobs:
       private_key: ${{ secrets.PRIVATE_KEY }}
       username: ${{ secrets.USERNAME }}
       host: ${{ secrets.HOST }}
-    steps:
-    - name: Fun
-      run: echo ${{ secrets.HOST }}
 
     - name: Deploy
       uses: appleboy/ssh-action@master
