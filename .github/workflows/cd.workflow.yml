@@ -12,7 +12,7 @@ jobs:
       private_key: ${{ secrets.PRIVATE_KEY }}
       username: ${{ secrets.USERNAME }}
       host: ${{ secrets.HOST }}
-
+    steps:
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
