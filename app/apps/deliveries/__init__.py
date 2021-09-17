@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from . import sample
+from . import video
 
-
-DELIVERIES = [sample]
+DELIVERIES = [sample, video]
 
 
 class DeliveryDescription(ABC):
