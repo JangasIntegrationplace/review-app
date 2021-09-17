@@ -78,7 +78,7 @@ export const SignIn = (props) => {
   return (
     <React.Fragment>
       <Typography component="h1" variant="h5" align="center">
-        Sign In (Via CD)
+        Sign In
       </Typography>
       <form
         className={classes.form}
