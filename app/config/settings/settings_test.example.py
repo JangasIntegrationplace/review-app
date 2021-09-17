@@ -4,7 +4,17 @@ from config.settings.base import *
 INSTALLED_APPS += [
     'apps.review',
     'apps.accounts',
+    'apps.support',
+    'channels'
 ]
+
+ASGI_APPLICATION = 'config.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 DATABASES = {
     'default': {
