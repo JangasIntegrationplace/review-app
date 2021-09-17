@@ -1,0 +1,71 @@
+version: "3"
+
+volumes: 
+  django-app-static-data:
+  postgres-db:
+
+services:
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 54321:5432
+    environment:
+      - POSTGRES_DB=${POSTGRES_POSTGRES_DB:-postgres}
+      - POSTGRES_USER=${POSTGRES_POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres-db:/var/lib/postgresql/data/
+
+  redis:
+    image: bitnami/redis:latest
+    ports:
+      - 63791:6379
+    environment:
+      - REDIS_MASTER_PASSWORD=masterpw123
+      - REDIS_PASSWORD=redispw123
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: prod
+    ports:
+      - 8000:8000
+      - 8001:8001
+    environment:
+      - SECRET_KEY=wngyd6*1qihp9qw3@!1ew##oh5=^myhd4egr&0!dnzph9jrinl
+      - DEBUG=True
+      - ALLOWED_HOSTS=*
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DATABASE=${POSTGRES_POSTGRES_DB:-postgres}
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=redispw123
+      - REDIS_PORT=6379
+      - DJANGO_SETTINGS_MODULE=config.settings.settings_docker
+      - REACT_APP_API_URL=django:8000/api
+
+      - WAIT_HOSTS=postgres:5432,redis:6379
+      - WAIT_HOSTS_TIMEOUT=100
+      - WAIT_SLEEP_INTERVAL=5
+      - WAIT_HOST_CONNECT_TIMEOUT=5
+    depends_on:
+      - postgres
+      - redis
+    command:
+      - sh
+      - -c
+      - |
+        ./../wait
+        python manage.py migrate
+        python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - django-app-static-data:/app/staticfiles
+
+  build-react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build_fe

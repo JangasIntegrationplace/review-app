@@ -1,0 +1,4 @@
+*.env
+app/config/settings/settings_local.py
+app/react_frontend/build/
+*/build/
