@@ -28,5 +28,5 @@ jobs:
         pip install pytest
     - name: Test with pytest
       run: |
-        cd app
-        pytest
+        cp app/config/settings/settings_test.example.py app/config/settings/settings_test.py
+        pytest app
