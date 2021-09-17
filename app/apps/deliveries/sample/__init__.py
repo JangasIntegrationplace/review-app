@@ -1,3 +1,7 @@
+import os
+
+DELIVERY_DIR = os.getcwd()
+
 
 def get_initial_instructions():
     description = """
