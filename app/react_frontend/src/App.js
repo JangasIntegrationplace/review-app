@@ -9,7 +9,6 @@ import ProcessBackdrop from './components/ProcessBackdrop';
 import Base from './components/Wrapper/index'
 
 function App(props) {
-  console.log("APP LOADED")
   const { isAuthenticated } = props;
   
   const handleInitialAuth = async () => {
