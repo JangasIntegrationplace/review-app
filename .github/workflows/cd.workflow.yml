@@ -17,3 +17,4 @@ jobs:
         host: ${{ secrets.HOST }}
         script: |
           bash review-app/deploy.sh
+
