@@ -1,17 +1,33 @@
 name: CD
 on:
-  workflow_run:
-    workflows: ["CI"]
-    branches: [master]
-    types: 
-      - completed
+  push:
+    branches:
+      - master
 
 jobs:
   build:
     needs: CI
     name: Build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install -r app/requirements.txt
+        pip install pytest
+    - name: Test
+      run: |
+        cp app/config/settings/settings_test.example.py app/config/settings/settings_test.py
+        cp app/.env.example app/.env
+        pytest app
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
