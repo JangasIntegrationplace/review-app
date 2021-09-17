@@ -12,9 +12,9 @@ jobs:
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
-        password: ${{ env.PASSWORD }}
-        username: ${{ env.USERNAME }}
-        host: ${{ env.HOST }}
+        password: ${{ secrets.PASSWORD }}
+        username: ${{ secrets.USERNAME }}
+        host: ${{ secrets.HOST }}
         script: |
           whoami
           ls -al
