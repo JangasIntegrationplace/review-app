@@ -9,4 +9,7 @@ def get_initial_instructions():
 
 
 def receive_request(msg):
-    return {"data": "This is fun!"}
+    return {
+        "input": msg,
+        "output": {"evaluation": "This is fun!"}
+    }

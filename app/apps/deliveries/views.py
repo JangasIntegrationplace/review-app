@@ -28,7 +28,8 @@ class DeliveryAPI(RetrieveAPIView, CreateAPIView):
         instance = self.get_object()
         input_text = request.data["body"]
         data = instance.receive_request(input_text)
-        assert "data" in data
+        assert "output" in data
+        assert "input" in data
         return Response(data)
 
 

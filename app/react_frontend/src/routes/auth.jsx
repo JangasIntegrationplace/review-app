@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 
 import JangasCodingplace from '../pages/Deliveries/JangasCodingplace';
 import { ReviewDetail } from '../pages/Deliveries/JangasCodingplace/reviewDetail';
+import { GenericDelivery } from '../pages/Deliveries/Generic';
 
 
 export const AuthOnly = (props) => {
@@ -13,7 +14,8 @@ export const AuthOnly = (props) => {
 
   return (
     <React.Fragment>
-      <Route path="/:sampleId/:reviewId" component={ReviewDetail} />
+      <Route exact path="/delivery/:delivery" component={GenericDelivery} />
+      <Route exact path="/sample/:sampleId/:reviewId" component={ReviewDetail} />
       <Route exact path="/" component={JangasCodingplace} />
     </React.Fragment>
   )
