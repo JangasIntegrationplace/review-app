@@ -8,11 +8,20 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      private_key: ${{ secrets.PRIVATE_KEY }}
+      username: ${{ secrets.USERNAME }}
+      host: ${{ secrets.HOST }}
     steps:
+    - name: Fun
+      run: echo ${{ secrets.HOST }}
+
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
-        key: ${{ secrets.PRIVATE_KEY }}
-        username: ${{ secrets.USERNAME }}
-        host: ${{ secrets.HOST }}
-        script: whoami && ls
+        key: ${{ env.private_key }}
+        username: ${{ env.username }}
+        host: ${{ env.host }}
+        script: |
+          whoami
+          ls -al
