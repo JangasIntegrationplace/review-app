@@ -29,4 +29,5 @@ jobs:
     - name: Test with pytest
       run: |
         cp app/config/settings/settings_test.example.py app/config/settings/settings_test.py
+        cp app/.env.example app/.env
         pytest app
