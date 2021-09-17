@@ -16,5 +16,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         host: ${{ secrets.HOST }}
         script: |
-          whoami
-          ls -al
+          bash review-app/deploy.sh
