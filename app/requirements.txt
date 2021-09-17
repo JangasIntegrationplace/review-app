@@ -9,3 +9,4 @@ channels==3.0.4
 channels-redis==3.3.0
 pytest==6.2.5
 pytest-django==4.4.0
+tensorflow==2.6.0
